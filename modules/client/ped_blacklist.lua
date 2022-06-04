@@ -4,7 +4,7 @@ local pedblacklist = ClientConfig.BlacklistedPeds
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(3000)
-		playerPed = GetPlayerPed(-1)
+		playerPed = PlayerPedId()
 		if playerPed then
 			playerModel = GetEntityModel(playerPed)
 			if not prevPlayerModel then

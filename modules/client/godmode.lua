@@ -16,7 +16,7 @@ Citizen.CreateThread(function()
 	end
 	while true do
 		Citizen.Wait(15000)
-		local ped = GetPlayerPed(-1)
+		local ped = PlayerPedId()
 		local initHealth = GetEntityHealth(ped)
 		local rVal = math.random(1, 3)
 		local modified = (initHealth - rVal)
@@ -24,7 +24,7 @@ Citizen.CreateThread(function()
 		SetEntityHealth(ped, modified)
 		local toWait = math.random(10, 50)
 		Citizen.Wait(toWait)
-		ped = GetPlayerPed(-1)
+		ped = PlayerPedId()
 		local postHealth = GetEntityHealth(ped)
 		if postHealth > modified and postHealth > 0 and not IsPedDeadOrDying(ped) then
 			TriggerServerEvent("anticheat:flagAsCheater", "Godmode [C1]", false)
@@ -38,7 +38,7 @@ end)
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(500)
-		local ped = GetPlayerPed(-1)
+		local ped = PlayerPedId()
 		local pedArmor = GetPedArmour(ped)
 		if pedArmor > 0 then
 			hadArmor = true
@@ -76,7 +76,7 @@ end)
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(5000)
-		local ped = GetPlayerPed(-1)
+		local ped = PlayerPedId()
 		local pedHealth = GetEntityHealth(ped)
 		local maxHealth = GetEntityMaxHealth(ped)
 		local pedArmor = GetPedArmour(ped)
@@ -97,7 +97,7 @@ end)
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
-		local ped = GetPlayerPed(-1)
+		local ped = PlayerPedId()
 		if GetPlayerInvincible_2(ped) or GetEntityCanBeDamaged(ped) == false then
 			if IsPedShooting(ped) or IsPedInCombat(ped) then
 				TriggerServerEvent("anticheat:flagAsCheater", "Godmode [C7]", false)

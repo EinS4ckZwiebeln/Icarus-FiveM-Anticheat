@@ -1,7 +1,7 @@
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(5000)
-		local pId = PlayerId()
+		local pId = PlayerPedId()
 		if GetPlayerWeaponDamageModifier(pId) > 1.0 then
 			TriggerServerEvent("anticheat:flagAsCheater", "Illegal WeaponModifier", false)
 			return

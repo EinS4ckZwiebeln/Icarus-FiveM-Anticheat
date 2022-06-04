@@ -8,7 +8,7 @@ local gTime = GetGameTimer()
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(500)
-		ped = GetPlayerPed(-1)		
+		ped = PlayerPedId()		
 		inVehicle = IsPedInAnyVehicle(ped)
 		attached = IsEntityAttachedToEntity(ped)
 	end

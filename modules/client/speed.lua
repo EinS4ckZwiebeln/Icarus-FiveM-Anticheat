@@ -10,12 +10,11 @@ end
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(250)
-		local ped = GetPlayerPed(-1)
+		local ped = PlayerPedId()
 		local speed = GetEntitySpeed(ped)
 		local coords = GetEntityCoords(ped)
 		local hit, hitPos = IsFacingWater(ped)
 		local threshold = 10.0
-		-- get hit by player false postives?
 
 		if IsPedInParachuteFreeFall(ped) or GetPedParachuteState(ped) > 0 or IsPedFalling(ped) then
 			threshold = 90.0

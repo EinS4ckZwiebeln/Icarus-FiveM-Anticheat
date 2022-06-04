@@ -21,35 +21,6 @@ Citizen.CreateThread(function()
 	end
 end)
 
---[[
-local lines = {}
-local lines2 = {}
-
-Citizen.CreateThread(function()
-	while true do
-		Citizen.Wait(0)
-		for i = 1, #lines do
-			local a = lines[i]
-			for i = 1, #lines2 do
-				local b = lines2[i]
-				DrawLine(a.x, a.y, a.z, b.x, b.y, b.z, 255, 0, 0, 255)
-			end
-		end
-		if IsControlJustReleased(1, 46) then
-			local c = GetEntityCoords(GetPlayerPed(-1))
-			local modelHash = GetHashKey("g_m_y_ballasout_01")
-			RequestModel(modelHash)
-			while not HasModelLoaded(modelHash) do
-				Citizen.Wait(1)
-			end
-			local ped = CreatePed(0, modelHash , c.x, c.y, c.z - 1, rot, true, true)
-			FreezeEntityPosition(ped, true)
-		end
-	end
-end)
-
---]]
-
 local rayFlagsLocation = 1
 local rayFlagsObstruction = 273
 local count = 0
@@ -79,8 +50,6 @@ AddEventHandler('gameEventTriggered', function(name, data)
 			for i = 1, #rays do
     			local testRay = StartShapeTestRay(rays[i], dest, rayFlagsLocation, ped, 7)
     			local _, hit, hitLocation, surfaceNormal, material, _ = GetShapeTestResultEx(testRay)
-				--[[lines[#lines + 1] = rays[i]
-				lines2[#lines2 + 1] = dest --]]
 
 				if hit == 1 then
 					local threshold = GetDistanceBetweenCoords(dest, hitLocation)
@@ -109,7 +78,7 @@ AddEventHandler('gameEventTriggered', function(name, data)
 	if name == "CEventNetworkEntityDamage" then
 		local ped = data[2]
 		local hash = data[3]
-		local headshot = data[11] --headshot?
+		local headshot = data[11]
 
 		if (IsEntityAPed(targetEntity) or IsPedAPlayer(targetEntity)) and IsPedAPlayer(ped) and isBadHash(hash) == false then
 			totalDamageEvents = totalDamageEvents + 1
