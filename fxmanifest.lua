@@ -2,7 +2,7 @@ fx_version 'cerulean'
 
 game 'gta5'
 
-description 'Complete and open source anticheat solution for your FiveM server'
+description '(ALPHA) Anticheat solution for FiveM'
 
 version '0.0.1'
 
