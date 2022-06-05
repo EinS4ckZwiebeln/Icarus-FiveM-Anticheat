@@ -22,7 +22,6 @@ Citizen.CreateThread(function()
 end)
 
 local rayFlagsLocation = 1
-local rayFlagsObstruction = 273
 local count = 0
 
 function isBadHash(hash)
@@ -41,7 +40,7 @@ AddEventHandler('gameEventTriggered', function(name, data)
 		local ped = data[2]
 		local hash = data[3]
 
-		if (IsEntityAPed(targetEntity) or IsPedAPlayer(targetEntity)) and IsPedAPlayer(ped) and not IsPedDeadOrDying(targetEntity) and isBadHash(hash) == false then
+		if (IsEntityAPed(targetEntity) or IsPedAPlayer(targetEntity)) and IsPedAPlayer(ped) and not IsPedDeadOrDying(targetEntity) and not isBadHash(hash) then
 			local camcoords = GetFinalRenderedCamCoord()
 			local _, bone = GetPedLastDamageBone(targetEntity)
 			local rays = {[1] = camcoords, [2] = vec3(camcoords.x, camcoords.y, camcoords.z + 2.5), [3] = GetOffsetFromEntityInWorldCoords(ped, 2.5, 1.5, 0.8), [4] = GetOffsetFromEntityInWorldCoords(ped, -2.5, 1.5, 0.8)}
@@ -49,12 +48,15 @@ AddEventHandler('gameEventTriggered', function(name, data)
 
 			for i = 1, #rays do
     			local testRay = StartShapeTestRay(rays[i], dest, rayFlagsLocation, ped, 7)
-    			local _, hit, hitLocation, surfaceNormal, material, _ = GetShapeTestResultEx(testRay)
+    			local _, hit, hitLocation, surfaceNormal, material, entityHit = GetShapeTestResultEx(testRay)
 
-				if hit == 1 then
+				if hit == 1 and (entityHit == 0 or entityHit == targetEntity) then
 					local threshold = GetDistanceBetweenCoords(dest, hitLocation)
 					if threshold > 5.0 then
 						count = count + 1
+						if count >= #rays then
+							TriggerServerEvent("anticheat:flagAsCheater", "Aimbot [C1]", false)
+						end
 					end
 				else
 					count = 0
@@ -64,23 +66,14 @@ AddEventHandler('gameEventTriggered', function(name, data)
 	end
 end)
 
-Citizen.CreateThread(function()
-	while true do
-		Citizen.Wait(500)
-		if count >= (3 * 4) then
-			TriggerServerEvent("anticheat:flagAsCheater", "Aimbot [C1]", false)
-			return
-		end
-	end
-end)
-
 AddEventHandler('gameEventTriggered', function(name, data)
 	if name == "CEventNetworkEntityDamage" then
+		local targetEntity = data[1]
 		local ped = data[2]
 		local hash = data[3]
 		local headshot = data[11]
 
-		if (IsEntityAPed(targetEntity) or IsPedAPlayer(targetEntity)) and IsPedAPlayer(ped) and isBadHash(hash) == false then
+		if (IsEntityAPed(targetEntity) or IsPedAPlayer(targetEntity)) and IsPedAPlayer(ped) and not isBadHash(hash) then
 			totalDamageEvents = totalDamageEvents + 1
 			if headshot == 1 then
 				totalHeadshots = totalHeadshots + 1
