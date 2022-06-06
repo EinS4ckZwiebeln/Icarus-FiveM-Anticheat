@@ -1,3 +1,7 @@
+if not ClientConfig.Modules.Speed.enabled then
+    return
+end
+
 local gTime = GetGameTimer()
 
 function IsFacingWater(ped)
@@ -14,14 +18,14 @@ Citizen.CreateThread(function()
 		local speed = GetEntitySpeed(ped)
 		local coords = GetEntityCoords(ped)
 		local hit, hitPos = IsFacingWater(ped)
-		local threshold = 10.0
+		local threshold = ClientConfig.Modules.Speed.baseThreshold
 
 		if IsPedInParachuteFreeFall(ped) or GetPedParachuteState(ped) > 0 or IsPedFalling(ped) then
-			threshold = 90.0
+			threshold = ClientConfig.Modules.Speed.airborneThreshold
 		elseif IsPedSwimmingUnderWater(ped) or IsPedSwimming(ped) then
-			threshold = 13.25
+			threshold = ClientConfig.Modules.Speed.waterThreshold
 		elseif hit or (gTime ~= nil and (GetGameTimer() - gTime) < 250) or IsEntityInAir(ped) or IsPedJumping(ped) or IsPedInMeleeCombat(ped) or IsPedStrafing(ped) or IsPedVaulting(ped) or IsPedClimbing(ped) or GetEntityHeightAboveGround(ped) > 1.1 then
-			threshold = 14.0
+			threshold = ClientConfig.Modules.Speed.miscThreshold
 		end
 		if speed > threshold and not IsPedInAnyVehicle(ped) and not IsPedJumpingOutOfVehicle(ped) and not IsPedRagdoll(ped) and not IsPedDeadOrDying(ped) then
 			TriggerServerEvent("anticheat:flagAsCheater", "Speed", false)

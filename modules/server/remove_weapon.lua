@@ -1,3 +1,7 @@
+if not ServerConfig.Modules.RemoveWeapon.enabled then
+    return
+end
+
 AddEventHandler("removeWeaponEvent", function(source, data)
 	source = tonumber(source)
 	local entity = NetworkGetEntityFromNetworkId(data.pedId)

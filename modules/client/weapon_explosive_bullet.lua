@@ -1,3 +1,7 @@
+if not ClientConfig.Modules.ExplosiveBullet.enabled then
+    return
+end
+
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(5000)

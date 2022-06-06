@@ -1,3 +1,7 @@
+if not ClientConfig.Modules.Spectator.enabled then
+    return
+end
+
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(5000)

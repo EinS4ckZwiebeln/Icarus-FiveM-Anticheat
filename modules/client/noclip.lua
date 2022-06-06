@@ -1,5 +1,9 @@
+if not ClientConfig.Modules.NoClip.enabled then
+    return
+end
+
 local loaded = false
-local rayFlagsLocation = 1
+local rayFlagsLocation = ClientConfig.Modules.NoClip.rayFlag
 
 AddEventHandler("playerSpawned", function()
 	Citizen.Wait(15000)
@@ -12,7 +16,7 @@ end)
 
 function legitVehicleClass(vehicle)
 	local class = GetVehicleClass(vehicle)
-	local forbiddenClasses = { 21, 19, 18, 16, 15, 14}
+	local forbiddenClasses = ClientConfig.Modules.NoClip.vehicleClasses
 	for i=1, #forbiddenClasses do
 		if class == forbiddenClasses[i] then
 			return true
@@ -51,7 +55,7 @@ Citizen.CreateThread(function()
 						count = 0
 					end
 				end
-				if count >= (3 * #rays) then
+				if count >= (ClientConfig.Modules.NoClip.failedHits * #rays) then
 					TriggerServerEvent("anticheat:flagAsCheater", "NoClip", false)
 					return
 				end

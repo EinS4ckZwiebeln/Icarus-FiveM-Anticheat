@@ -1,3 +1,7 @@
+if not ServerConfig.Modules.Injection.enabled then
+    return
+end
+
 local validResourceList
 
 local function collectValidResourceList()

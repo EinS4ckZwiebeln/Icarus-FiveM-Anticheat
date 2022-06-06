@@ -1,5 +1,72 @@
 ClientConfig = {}
 
+-- Configure any module to your liking
+ClientConfig.Modules = {
+
+	Aimbot = {
+		enabled = true,
+		threshold = 5.0,
+		headshot_rate = 0.8
+	},
+
+	Godmode = {
+		enabled = true,
+		decrement = math.random(1, 3),
+		wait = math.random(10, 50),
+		maxHealth = 200,
+		maxArmor = 100
+	},
+
+	Natives = {
+		enabled = true
+	},
+
+	NoClip = {
+		enabled = true,
+		vehicleClasses = { 21, 19, 18, 16, 15, 14 },
+		failedHits = 3,
+		rayFlag = 1
+	},
+
+	PedBlacklist = {
+		enabled = true,
+	},
+
+	Spectator = {
+		enabled = true
+	},
+
+	Speed = {
+		enabled = true,
+		baseThreshold = 10.0,
+		waterThreshold = 13.25,
+		airborneThreshold = 90.0,
+		miscThreshold = 14.0
+	},
+
+	Ammunition = {
+		enabled = true
+	},
+
+	WeaponBlacklist = {
+		enabled = true
+	},
+
+	WeaponModifier = {
+		enabled = true
+	},
+
+	ExplosiveBullet = {
+		enabled = true
+	},
+
+	DevTools = {
+		enabled = true
+	},
+
+}
+
+-- Weapons that get players banned
 ClientConfig.BlacklistedWeapons = {
 	"WEAPON_RAILGUN",
 	"WEAPON_GARBAGEBAG",
@@ -33,6 +100,7 @@ ClientConfig.BlacklistedWeapons = {
 	"WEAPON_GRENADELAUNCHER_SMOKE",
 }
 
+-- Peds that get players banned
 ClientConfig.BlacklistedPeds = {
 	"CSB_BallasOG",
 	"a_c_chop",

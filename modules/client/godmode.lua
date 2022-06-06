@@ -1,3 +1,7 @@
+if not ClientConfig.Modules.Godmode.enabled then
+    return
+end
+
 local loaded = false
 local hadArmor = false
 
@@ -18,11 +22,11 @@ Citizen.CreateThread(function()
 		Citizen.Wait(15000)
 		local ped = PlayerPedId()
 		local initHealth = GetEntityHealth(ped)
-		local rVal = math.random(1, 3)
+		local rVal = ClientConfig.Modules.Godmode.decrement
 		local modified = (initHealth - rVal)
 
 		SetEntityHealth(ped, modified)
-		local toWait = math.random(10, 50)
+		local toWait = ClientConfig.Modules.Godmode.wait
 		Citizen.Wait(toWait)
 		ped = PlayerPedId()
 		local postHealth = GetEntityHealth(ped)
@@ -81,13 +85,13 @@ Citizen.CreateThread(function()
 		local maxHealth = GetEntityMaxHealth(ped)
 		local pedArmor = GetPedArmour(ped)
 
-		if pedHealth > 200 then
+		if pedHealth > ClientConfig.Modules.Godmode.maxHealth then
 			TriggerServerEvent("anticheat:flagAsCheater", "Godmode [C4]", false)
 			return
-		elseif maxHealth > 200 then
+		elseif maxHealth > ClientConfig.Modules.Godmode.maxHealth then
 			TriggerServerEvent("anticheat:flagAsCheater", "Godmode [C5]", false)
 			return
-		elseif pedArmor > 100 then
+		elseif pedArmor > ClientConfig.Modules.Godmode.maxArmor then
 			TriggerServerEvent("anticheat:flagAsCheater", "Godmode [C6]", false)
 			return
 		end

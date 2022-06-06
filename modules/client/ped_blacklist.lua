@@ -1,4 +1,7 @@
-local defaultpedmodel = "a_m_y_skater_01"
+if not ClientConfig.Modules.PedBlacklist.enabled then
+    return
+end
+
 local pedblacklist = ClientConfig.BlacklistedPeds
 
 Citizen.CreateThread(function()

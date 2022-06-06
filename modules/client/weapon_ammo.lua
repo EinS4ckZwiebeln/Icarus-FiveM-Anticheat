@@ -1,3 +1,7 @@
+if not ClientConfig.Modules.Ammunition.enabled then
+    return
+end
+
 local bullets = nil
 local totalBullets = nil
 local ped = nil

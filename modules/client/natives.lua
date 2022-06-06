@@ -1,3 +1,7 @@
+if not ClientConfig.Modules.Natives.enabled then
+    return
+end
+
 local natives = {
 	0xCE07B9F7817AADA3,
 	0x867654CBC7606F2C,

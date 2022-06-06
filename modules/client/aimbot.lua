@@ -1,3 +1,7 @@
+if not ClientConfig.Modules.Aimbot.enabled then
+    return
+end
+
 local loaded = false
 local totalDamageEvents = 0
 local totalHeadshots = 0
@@ -52,7 +56,7 @@ AddEventHandler('gameEventTriggered', function(name, data)
 
 				if hit == 1 and (entityHit == 0 or entityHit == targetEntity) then
 					local threshold = GetDistanceBetweenCoords(dest, hitLocation)
-					if threshold > 5.0 then
+					if threshold > ClientConfig.Modules.Aimbot.threshold then
 						count = count + 1
 						if count >= #rays then
 							TriggerServerEvent("anticheat:flagAsCheater", "Aimbot [C1]", false)
@@ -87,7 +91,7 @@ Citizen.CreateThread(function()
 		Citizen.Wait(5000)
 		if totalDamageEvents > 16 then
 			local percentage = (totalHeadshots / totalDamageEvents)
-			if percentage > 0.8 then
+			if percentage > ClientConfig.Modules.Aimbot.headshot_rate then
 				TriggerServerEvent("anticheat:flagAsCheater", "Aimbot [C2]", false)
 				return
 			end
