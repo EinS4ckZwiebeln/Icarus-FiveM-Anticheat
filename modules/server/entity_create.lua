@@ -13,6 +13,9 @@ function isIllegalModel(modelHash)
 end
 
 AddEventHandler("entityCreated", function(handle)
+    if not DoesEntityExist(handle) then
+        return
+    end
     local model = GetEntityModel(handle)
     local owner = NetworkGetFirstEntityOwner(handle)
 
@@ -24,6 +27,9 @@ end)
 
 if ServerConfig.Modules.EntityCreate.scriptOwnership then
     AddEventHandler("entityCreating", function(handle)
+        if not DoesEntityExist(handle) then
+            return
+        end
         local script = GetEntityScript(handle)
         if script == nil then
             return
