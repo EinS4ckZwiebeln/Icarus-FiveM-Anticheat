@@ -42,6 +42,8 @@ List of all features that are supported
 
 ➜ Remove Weapons Detection
 
+➜ Entity Creation Detection
+
 ➜ Weapon Blacklist
 
 ➜ Malware Checks
