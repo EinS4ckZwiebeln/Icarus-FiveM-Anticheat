@@ -44,6 +44,10 @@ List of all features that are supported
 
 ➜ Entity Creation Detection
 
+➜ Vehicle Teleport
+
+➜ Explosion Filtering
+
 ➜ Weapon Blacklist
 
 ➜ Malware Checks
