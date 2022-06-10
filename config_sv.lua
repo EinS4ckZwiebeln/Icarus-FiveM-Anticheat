@@ -49,6 +49,10 @@ ServerConfig.Modules = {
 		enabled = true,
 		scriptOwnership = true, -- Is entity owned by not existing script?
 	},
+
+	ExplosionFilter = {
+		enabled = true,
+	},
 }
 
 -- Objects that get instantly deleted (including vehicles)
@@ -205,3 +209,5 @@ ServerConfig.IllegalModels = {
 	"stt_prop_stunt_track_dwslope30",
 	"stt_prop_stunt_track_dwslope45",
 }
+
+ServerConfig.IllegalExplosionTypes = { 0, 1, 2, 4, 5, 18, 19, 20, 21, 26, 29, 30, 31, 32, 33, 35, 36, 37, 38, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 68, 69, 70, 71, 72, 73, 74, 75, 81, 82}
