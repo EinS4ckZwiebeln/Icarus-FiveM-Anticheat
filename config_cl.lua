@@ -1,20 +1,22 @@
 ClientConfig = {}
 
--- Configure any module to your liking
+-- Configure any module/detection to your liking
+-- Beware that some values are very sensitive and could break everything
 ClientConfig.Modules = {
 
 	Aimbot = {
 		enabled = true,
-		threshold = 5.0,
-		headshot_rate = 0.8
+		threshold = 5.0, -- raycast dinstance tolerance value
+		headshot_rate = 0.8, -- headshot quote that leads to a ban
+		rayFlag = 1 -- obstruction flag used for raycast
 	},
 
 	Godmode = {
 		enabled = true,
-		decrement = math.random(1, 3),
-		wait = math.random(10, 50),
-		maxHealth = 200,
-		maxArmor = 100
+		decrement = math.random(1, 3), -- how much health can be subtracted for full health checks
+		wait = math.random(10, 50), -- the interval to wait between substractions
+		maxHealth = 200, -- default max player health
+		maxArmor = 100 -- default max armor a player can have
 	},
 
 	Natives = {
@@ -23,9 +25,9 @@ ClientConfig.Modules = {
 
 	NoClip = {
 		enabled = true,
-		vehicleClasses = { 21, 19, 18, 16, 15, 14 },
-		failedHits = 3,
-		rayFlag = 1
+		vehicleClasses = { 21, 19, 18, 16, 15, 14 }, -- excluded players in these classes
+		failedHits = 3, -- how many missed rays lead to a ban (multitude)
+		rayFlag = 1 -- obstruction flag used for raycast
 	},
 
 	PedBlacklist = {
@@ -38,10 +40,10 @@ ClientConfig.Modules = {
 
 	Speed = {
 		enabled = true,
-		baseThreshold = 10.0,
-		waterThreshold = 13.25,
-		airborneThreshold = 90.0,
-		miscThreshold = 14.0
+		baseThreshold = 10.0, -- default max speed
+		waterThreshold = 13.25, -- max legit speed in water/underwater
+		airborneThreshold = 90.0, -- max legit speed in the air
+		miscThreshold = 14.0 -- max legit speed for other scenarios such as combat, ragdolling etc.
 	},
 
 	Ammunition = {
@@ -191,4 +193,45 @@ ClientConfig.BlacklistedPeds = {
 	"u_m_y_zombie_01",
 	"u_m_y_rsranger_01",
 	"u_m_y_staggrm_01",
+}
+
+-- Weapons that will result in aimbot false postives can be disabled here
+-- These weapons are primarily explosives or similar
+ClientConfig.NoAimbotChecks = {
+	3058715602, 
+	286056380,
+	3357909247,	
+	4233768403,	
+	798856618,	
+	1693512364,	
+	1436779599,	
+	1768518260,	
+	428159217,	
+	1114654932,	
+	3883417820,		
+	2666433428,	
+	527211813,	
+	352593635,	
+	845770333,	
+	1762719600,	
+	1907543711,	
+	1115750597,	
+	2598821281,	
+	3280748971,	
+	2462366525,	
+	3779253713,	
+	2964119085,	
+	2557052034,
+	3104722777,
+	1195540791,
+	1015970717,
+	335057065,
+	2441087679,
+	4143991942,
+	3476653675,
+	3564062519,
+	881270991,
+	2211086889,
+	2820610173,
+	2621769546,
 }
